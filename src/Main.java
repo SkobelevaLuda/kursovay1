@@ -14,10 +14,71 @@ public class Main {
         EMPLOYEES[9] = new Employee("Жужин Илья Олегович", 98_000, 3);
 
         printFullInfo();
+        Employee minSalaru=fullMinSalaru();
+        System.out.println(" Сотрудник с минимальной ЗП: " +minSalaru);
+        Employee maxSalaru=fullMaxSalaru();
+        System.out.println(" Сотрудник с максимальной ЗП: " +maxSalaru);
+        printFullNameInfo();
+
+        int totalSalary = getTotalSalarys();
+        System.out.println(" Сумма зарплат: " + totalSalary);
+
+        double averegeSalary=findSalary();
+        System.out.println(" Средняя зарплата: " + averegeSalary);
     }
     private static void printFullInfo(){
         for (Employee employee: EMPLOYEES){
             System.out.println(employee);
+        }
+    }
+    private static int getTotalSalarys(){
+        int sum = 0;
+        for (Employee employee: EMPLOYEES){
+            if(employee!=null){
+                sum=sum+employee.getSalary();
+            }
+        }
+        return sum;
+    }
+    private static Employee fullMinSalaru() {
+        int min = Integer.MAX_VALUE;
+        Employee minSalaru = null;
+        for (Employee employee : EMPLOYEES) {
+            if (employee != null && employee.getSalary() < min) {
+                min = employee.getSalary();
+                minSalaru = employee;
+            }
+        }
+        return minSalaru;
+    }
+
+    private static Employee fullMaxSalaru() {
+        int max = Integer.MIN_VALUE;
+        Employee maxSalaru = null;
+        for (Employee employee : EMPLOYEES) {
+            if (employee != null && employee.getSalary() > max) {
+                max = employee.getSalary();
+                maxSalaru = employee;
+            }
+        }
+        return maxSalaru;
+    }
+
+    private static double findSalary(){
+        int count = 0;
+        for (Employee employee: EMPLOYEES){
+            if (employee!=null){
+                count++;
+            }
+        }
+        if (count!=0){
+            return (double) getTotalSalarys()/count;
+        }
+        return 0;
+    }
+    private static void printFullNameInfo() {
+        for (Employee employee : EMPLOYEES) {
+            System.out.println(employee.getFio());
         }
     }
 }
